@@ -32,7 +32,7 @@
 		justify-content: center;
 		margin-top: 32px;
 
-		.custom-pagination {
+		.pagination {
 			display: flex;
 			align-items: center;
 			user-select: none;
@@ -58,7 +58,7 @@
 					margin-right: 0;
 				}
 
-				&.active {
+				&.active_page {
 					background-color: $bg_color;
 					border-color: $bg_color;
 					color: #fff;

@@ -37,14 +37,14 @@ export default function Home({ data }) {
           previousLabel={<Icon icon="chevron-left" width={20} height={20} />}
           nextLabel={<Icon icon="chevron-right" width={20} height={20} />}
           pageCount={10}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={3}
-          containerClassName={'custom-pagination'}
+          pageRangeDisplayed={2}
+          marginPagesDisplayed={2}
+          containerClassName={'pagination'}
           pageClassName={'pagination-item'}
           breakClassName={'pagination-item'}
           previousClassName={'pagination-item'}
           nextClassName={'pagination-item'}
-          activeClassName={'active'}
+          activeClassName={'active_page'}
           onPageChange={handleChanges}
           forcePage={Number(router.query.page) - 1 || 0}
         />

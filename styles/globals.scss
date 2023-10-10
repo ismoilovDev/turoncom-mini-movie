@@ -70,6 +70,35 @@ li {
    }
 }
 
+.custom-404 {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100vh;
+   text-align: center;
+
+   h1 {
+      font-size: 6vw;
+      font-weight: 700;
+      letter-spacing: .3px;
+
+      @media (min-width: 420px) {
+         font-size: 24px;
+      }
+   }
+
+   p {
+      font-size: 4vw;
+      font-weight: 400;
+      letter-spacing: .3px;
+
+      @media (min-width: 420px) {
+         font-size: 16px;
+      }
+   }
+}
+
 .alice-carousel__wrapper {
    padding: 1.3rem 0;
 }
