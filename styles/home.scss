@@ -32,7 +32,7 @@
 		justify-content: center;
 		margin-top: 32px;
 
-		.pagination {
+		.pagination-container {
 			display: flex;
 			align-items: center;
 			user-select: none;
@@ -59,7 +59,9 @@
 				}
 
 				&.active_page {
-					display: none;
+					background-color: $bg_color;
+					border-color: $bg_color;
+					color: #fff;
 				}
 
 				a {

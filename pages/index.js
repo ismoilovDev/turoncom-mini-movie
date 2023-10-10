@@ -37,9 +37,9 @@ export default function Home({ data }) {
           nextLabel={<Icon icon="chevron-right" width={20} height={20} />}
           previousLabel={<Icon icon="chevron-left" width={20} height={20} />}
           pageCount={10}
-          pageRangeDisplayed={0}
-          marginPagesDisplayed={0}
-          containerClassName={'pagination'}
+          pageRangeDisplayed={2}
+          marginPagesDisplayed={2}
+          containerClassName={'pagination-container'}
           pageClassName={'pagination-item'}
           breakClassName={'pagination-item'}
           previousClassName={'pagination-item'}
