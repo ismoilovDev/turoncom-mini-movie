@@ -1,40 +1,153 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Technical task
 
-## Getting Started
+**Assignment**
 
-First, run the development server:
+- You have to create mini movie website in **Next.JS**:
+- You should share **your source code** (github repo) and **your work url** (which is deployed Vercel or Netlify). Please, don't forget this!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. **Main task**.
+
+   - It should include that:
+
+   1. Movies list
+   2. Movie list Pagination
+   3. Each movie card element consists of movie poster, title and year.
+
+2. **Movie details**.
+   - It should include that:
+   1. Poster
+   2. Movie title
+   3. Movie description
+   4. Movie year
+   5. Movie country
+   6. Movie genre
+   7. Demo player (It has to contain any video you want. Custom Video player is more prefered)
+   8. Employees (who perform an action in the movie) images
+
+**Deadline** - 3 days until _(12.10.2023 10:55)_
+
+- **If your date is expired, the given APIs will not work. Please, try to submit your work till the deadline**
+
+**Main URL: `https://api.cinerama.uz/api-test`**
+
+- Your Request Header:
+
+```ts
+{
+  "secret-token": "2588c96d-909b-4be7-bb95-423d617f7b12"
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. API to get Movies list:
+   **`https://api.cinerama.uz/api-test/movie-list?page=1&items=20`**
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- Request method: **GET**
+- **page (in query)** - is used to paginate movies list
+- **items (in query)** - is movies number in each page
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+**Response like this:**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```ts
+{
+  "status": boolean,
+  "code": number,
+  "message": string,
+  "data": {
+    "total": number,
+    "lastPage": number,
+    "currentPage": number,
+    "movieList": Array<{
+      "id": number,
+      "modulId": number,
+      "cardType": string,
+      "poster": string,
+      "title": string,
+      "title_en": string,
+      "year": number,
+      "quality": string,
+      "age_limit": number,
+      "is_serial": boolean,
+      "is_new": boolean,
+      "is_favourite": boolean,
+      "genres": Array<{
+        "id": number,
+        "title": string,
+        "order_position": string
+      }>
+    }>
+  }
+}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. API to get Movie details:
+   **` https://api.cinerama.uz/api-test/movie-detail?id=222`**
 
-## Learn More
+- Request method: **GET**
+- **id (in query)** - is movie id
 
-To learn more about Next.js, take a look at the following resources:
+**Response like that:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```ts
+{
+  "status": string,
+  "code": number,
+  "message": string,
+  "data": Array<{
+    "id": number,
+    "poster": string,
+    "title": string,
+    "title_en": string,
+    "description": string,
+    "moduleId": number,
+    "movie_slug": string,
+    "budget": string,
+    "slogan" string,
+    "year": number,
+    "is_favourite": boolean,
+    "age_limit": number,
+    "is_serial": boolean,
+    "is_free": boolean,
+    "upload_time": number,
+    "created_at": string,
+    "countries": Array<{
+      "id": number,
+      "title": string
+    }>,
+    "genres": Array<{
+      "id": number,
+      "title": string
+    }>,
+    "kp_rating": number,
+    "imdb_rating": number,
+    "people": Array<{
+      "post": string,
+      "employees": Array<{
+        "id": number,
+        "full_name": string,
+        "full_name_en": string,
+        "photo": string
+      },
+      {
+        "post": string,
+        "employees": Array<{
+          "id": number,
+          "full_name": string,
+          "full_name_en": string|null,
+          "photo": string
+        }>
+      }>
+    }>,
+    "files": Array<{
+      "id": number,
+      "poster": string,
+      "fileSize": number,
+      "quality": string,
+      "fileDuration": number,
+      "fileWidth": number,
+      "fileHeight": number,
+      "isWatched": boolean,
+      "lastPosition": number
+    }>
+  }>
+}
+```

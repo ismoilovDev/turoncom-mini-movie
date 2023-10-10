@@ -1,0 +1,123 @@
+.movie-info {
+   padding: 24px 0 64px;
+
+   .movie-poster {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 0 32px;
+
+      .movie-img {
+         height: 380px;
+         width: 100%;
+         border-radius: 8px;
+         overflow: hidden;
+         position: relative;
+      }
+
+      .movie-desc-wrapper {
+         display: grid;
+         grid-template-columns: 2fr 1fr;
+         gap: 0 24px;
+
+         .left {
+            .movie-name {
+               color: #e41a4b;
+               font-size: 28px;
+               line-height: 32px;
+               font-weight: 500;
+               letter-spacing: 0.5px;
+               margin-bottom: 16px;
+            }
+
+            .movie-desc {
+               font-size: 14px;
+               line-height: 18px;
+               letter-spacing: 0.3px;
+               margin-bottom: 24px;
+            }
+
+            .ratings {
+               display: grid;
+               align-items: center;
+               grid-template-columns: 1fr 1fr;
+               gap: 0 16px;
+               margin-bottom: 32px;
+
+               .rating {
+                  display: flex;
+                  align-items: center;
+                  font-size: 14px;
+                  line-height: 16px;
+                  overflow: hidden;
+                  border-radius: 8px;
+                  border: 1px solid #fff;
+                  padding-left: 8px;
+
+                  &-grade {
+                     background-color: #e41a4b;
+                     font-weight: 700;
+                     font-size: 28px;
+                     line-height: 32px;
+                     padding: 3px 8px;
+                     margin-left: auto;
+                  }
+               }
+            }
+
+            .play-btn {
+               width: 100%;
+               padding: 16px;
+               border-radius: 8px;
+               outline: none;
+               border: none;
+               color: white;
+               background-color: #e41a4b;
+               font-weight: 700;
+               font-size: 24px;
+               line-height: 32px;
+               letter-spacing: 0.3px;
+               cursor: pointer;
+               transition: all 0.3s;
+
+               &:active {
+                  transform: scale(0.95);
+               }
+            }
+         }
+
+         .right {
+            .category {
+               display: flex;
+               align-items: center;
+               margin-bottom: 16px;
+
+               &:last-child {
+                  margin-bottom: 0;
+               }
+
+               span {
+                  font-weight: 500;
+                  font-size: 16px;
+               }
+
+               &-name {
+                  color: #e41a4b;
+                  margin-right: 4px;
+                  font-size: 15px;
+               }
+            }
+         }
+      }
+   }
+
+   .movie-player {
+      padding-top: 32px;
+      margin-bottom: 32px;
+   }
+
+   .similar-movies {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 24px;
+   }
+}
