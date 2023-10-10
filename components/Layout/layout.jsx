@@ -1,16 +1,16 @@
 import { memo } from 'react'
 import Head from 'next/head'
-import Header from '../Header/header'
+import Navbar from '../Navbar/navbar'
 import Footer from '../Footer/footer'
 
 const Layout = ({ children }) => {
    return (
       <div className="layout">
          <Head>
-            <title>iTV Demo</title>
+            <title>Turoncom Movie Mini</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
          </Head>
-         <Header />
+         <Navbar />
          <div className="page">
             <div className="container">
                {children}

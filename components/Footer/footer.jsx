@@ -2,8 +2,8 @@ import { memo } from "react"
 
 const Footer = () => {
    return (
-      <footer className='footer-section'>
-         <p>© 2021 My Website</p>
+      <footer className='footer'>
+         <p>© Mini Movie 2023 App</p>
       </footer>
    )
 }

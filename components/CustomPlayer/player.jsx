@@ -1,13 +1,10 @@
-'use client'
+import { useRef, memo } from 'react';
 
-import { useState, useRef, memo } from 'react';
-
-const Player = ({ src }) => {
+const Player = ({ src, isPlaying, setIsPlaying }) => {
    const videoRef = useRef(null);
-   const [isPlaying, setIsPlaying] = useState(false);
 
    const togglePlay = () => {
-      if (videoRef.current.paused) {
+      if (!isPlaying) {
          videoRef.current.play();
          setIsPlaying(true);
       } else {
@@ -17,11 +14,13 @@ const Player = ({ src }) => {
    };
 
    return (
-      <div>
-         <video ref={videoRef} src={src} controls />
-         <button onClick={togglePlay}>
-            {isPlaying ? 'Pause' : 'Play'}
-         </button>
+      <div className='video-player'>
+         <video
+            ref={videoRef}
+            src={src}
+            controls
+            onClick={togglePlay}
+         />
       </div>
    );
 };

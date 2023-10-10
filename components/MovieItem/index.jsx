@@ -1,19 +1,33 @@
 import { memo } from 'react'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 const MovieItem = ({ data }) => {
    const router = useRouter()
+   const truncateTitle = (title, maxLength) => {
+      if (title.length > maxLength) {
+         return title.substring(0, maxLength) + '...';
+      }
+      return title;
+   }
    return (
-      <div onClick={() => router.push(`/movie/${data.id}`)} className="movie-item">
-         <div className="movie-img">
-            <Image src={data?.poster} layout={'fill'} priority />
-            <div className="addition-info">
-               {data.rates?.imdb && <p className="imdb">IMDb {data.rates?.imdb}</p>}
-               <p className="country">{data?.year},{data.countries[0]?.title}</p>
+      <div onClick={() => router.push(`/movie/${data.id}`)} className="movie-card">
+         <div className="movie-card-head">
+            <div className="movie-card-head-content">
+               <Image
+                  src={data?.poster}
+                  fill
+                  sizes='(max-width: 768px) 100vw, 768px'
+                  priority
+                  alt='poster image'
+               />
             </div>
+            <div className="bg_box"></div>
          </div>
-         <p className="movie-name">{data?.title}</p>
+         <div className="movie-card-body">
+            <p>{truncateTitle(data.title, 16)}</p>
+            <span>{data.year}</span>
+         </div>
       </div>
    )
 }

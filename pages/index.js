@@ -1,8 +1,9 @@
-import { BASE_URl, SECRET_TOKEN } from '@/config'
 import { useRouter } from 'next/router'
 import ReactPaginate from 'react-paginate'
-import Icon from 'public/assets/Icons'
-import MovieItem from '@/components/MovieItem'
+import { BASE_URl, SECRET_TOKEN } from '../config'
+import MovieItem from '../components/MovieItem'
+import Icon from '../public/assets/Icons'
+import NotFound from '../components/NotFound'
 
 export default function Home({ data }) {
   const router = useRouter()
@@ -14,16 +15,15 @@ export default function Home({ data }) {
   }
 
   if (!data?.movies) {
-    return <p className="data-not-found">Movies not found</p>
+    return <NotFound />
   }
 
   const { movies } = data
-  const pageCount = Math.ceil(data?.total_items / 18)
 
   return (
     <div className="home">
-      <h5 className="title">Фильмы</h5>
-      <div className="movies-wrapper">
+      <h5 className="section-title">Фильмы</h5>
+      <div className="movies-list">
         {
           movies?.length > 0 ?
             movies.map(item => (
@@ -36,7 +36,7 @@ export default function Home({ data }) {
         <ReactPaginate
           previousLabel={<Icon icon="chevron-left" width={20} height={20} />}
           nextLabel={<Icon icon="chevron-right" width={20} height={20} />}
-          pageCount={pageCount}
+          pageCount={10}
           pageRangeDisplayed={3}
           marginPagesDisplayed={3}
           containerClassName={'custom-pagination'}
@@ -62,7 +62,6 @@ export async function getServerSideProps({ query }) {
     }
   })
   const { data } = await response.json()
-  console.log(data)
   return {
     props: {
       data

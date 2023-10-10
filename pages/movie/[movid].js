@@ -1,24 +1,20 @@
+'use client'
+
 import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { BASE_URl, SECRET_TOKEN } from '@/config'
-import MovieItem from '@/components/MovieItem'
-import Player from '@/components/Player'
+import { BASE_URl, SECRET_TOKEN } from '../../config/index'
+import Player from '../../components/CustomPlayer/player'
+import Carusel from '../../components/Carusel/carusel'
+import NotFound from '../../components/NotFound'
 
 const MovieInfo = ({ data }) => {
    const scrollRef = useRef()
    const router = useRouter()
-
-   const [hasWindow, setHasWindow] = useState(false)
    const [play, setPlay] = useState(false)
 
    useEffect(() => {
-      if (typeof window !== 'undefined') {
-         setHasWindow(true)
-      }
-   }, [])
-
-   useEffect(() => {
+      console.log(data)
       router.events.on('routeChangeStart', () => setPlay(false))
 
       return () => {
@@ -26,69 +22,77 @@ const MovieInfo = ({ data }) => {
       }
    }, [router.asPath])
 
-   if (data?.code === undefined || data?.code === 404) {
-      return <p className="data-not-found">Movie not found</p>
+   if (!data?.status || data?.code === 404) {
+      return <NotFound />
    }
-   const { movie } = data?.data
+   
+   const movie = data?.data
 
    const playMovie = () => {
+      setPlay(true)
       scrollRef.current.scrollIntoView({ behavior: 'smooth' })
-      setTimeout(() => { setPlay(true) }, 100)
    }
-
    return (
-      <div className="movie-info">
+      <div className="movie-details">
          <div className="movie-poster">
             <div className="movie-img">
-               <Image src={movie?.files.poster_url} layout="fill" priority alt='' />
+               <Image
+                  src={movie?.poster}
+                  fill
+                  sizes='(max-width: 768px) 100vw, 768px'
+                  priority
+                  alt='poster image'
+               />
             </div>
-            <div className="movie-desc-wrapper">
-               <div className="left">
-                  <h5 className="movie-name">{movie?.title}</h5>
-                  <p className="movie-desc">{movie?.description}</p>
-                  <div className="ratings">
-                     <div className="rating">
-                        Рейтинг кинопоиска
-                        <span className="rating-grade">{movie?.rates.kinopoisk || '0.0'}</span>
-                     </div>
-                     <div className="rating">
-                        Рейтинг IMDb
-                        <span className="rating-grade">{movie?.rates.imdb || '0.0'}</span>
-                     </div>
+            <div className="movie-description">
+               <h4 className="movie-title">{movie?.title}</h4>
+               <h5 className="movie-title-en">{movie?.titleEn}</h5>
+               <p className="movie-desc-content">{movie?.description}</p>
+
+               <div className="ratings">
+                  <div className="ratings_item">
+                     <span className="ratings_item-name">IMDb</span>
+                     <span className="ratings_item-grade">{movie?.rating.imdb?.rating || '0.0'}</span>
                   </div>
-                  <button onClick={playMovie} className="play-btn">Смотреть</button>
+                  <div className="ratings_item">
+                     <span className="ratings_item-name">Кинопоиска</span>
+                     <span className="ratings_item-grade">{movie?.rating?.kp?.rating || '0.0'}</span>
+                  </div>
                </div>
-               <div className="right">
-                  {movie?.countries_str && <div className="category">
-                     <b className="category-name">Страна:</b>
-                     <span>{movie?.countries_str}</span>
-                  </div>}
-                  {movie?.year && <div className="category">
-                     <b className="category-name">Год:</b>
+               <button onClick={playMovie} className="play-btn">Смотреть</button>
+               <div className="movie-about">
+                  <h2>О фильме</h2>
+                  {movie?.year && <div className="movie-about-item">
+                     <span>Год:</span>
                      <span>{movie?.year}</span>
                   </div>}
-                  {movie?.genres_str && <div className="category">
-                     <b className="category-name">Жанр:</b>
-                     <span>{movie?.genres_str}</span>
+                  {movie?.countries && <div className="movie-about-item">
+                     <span>Страна:</span>
+                     {movie?.countries.map((item, index) => (
+                        <span key={index}>{item?.title}</span>
+                     ))}
                   </div>}
-                  {movie?.label && <div className="category">
-                     <b className="category-name">Провайдер:</b>
-                     <span>{movie?.label}</span>
+                  {movie?.genres && <div className="movie-about-item">
+                     <span>Жанр:</span>
+                     {movie?.genres.map((item, index) => (
+                        <span key={index}>{item?.title}, </span>
+                     ))}
                   </div>}
                </div>
             </div>
          </div>
          <div ref={scrollRef} className="movie-player">
-            {hasWindow && <Player key={router.asPath} videoUrl={'/assets/videos/mov_bbb.mp4'} playing={play} setPlaying={setPlay} />}
+            <Player
+               key={router.asPath}
+               src={'/assets/videos/video_example.mp4'}
+               isPlaying={play}
+               setIsPlaying={setPlay}
+            />
          </div>
-         {movie?.movies?.length > 0 && <>
-            <h5 className="title">Похожие</h5>
-            <div className="similar-movies">
-               {
-                  movie?.movies.map(item => (
-                     <MovieItem key={item.id} data={item} />
-                  ))
-               }
+         {movie?.actors && <>
+            <h5 className="section-title">Актеры</h5>
+            <div className="actors">
+               <Carusel contents={movie?.actors} />
             </div>
          </>}
       </div>
