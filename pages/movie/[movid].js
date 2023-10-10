@@ -14,7 +14,6 @@ const MovieInfo = ({ data }) => {
    const [play, setPlay] = useState(false)
 
    useEffect(() => {
-      console.log(data)
       router.events.on('routeChangeStart', () => setPlay(false))
 
       return () => {

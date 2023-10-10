@@ -19,7 +19,8 @@ export default function Home({ data }) {
   }
 
   const { movies } = data
-
+  const pageCount = Math.ceil(data?.total / 20)
+  
   return (
     <div className="home">
       <h5 className="section-title">Фильмы</h5>
@@ -34,9 +35,9 @@ export default function Home({ data }) {
       </div>
       <div className="pagination-wrapper">
         <ReactPaginate
-          nextLabel={<Icon icon="chevron-right" width={20} height={20} />}
-          previousLabel={<Icon icon="chevron-left" width={20} height={20} />}
-          pageCount={10}
+          nextLabel={<Icon icon="chevron-right" width={22} height={22} />}
+          previousLabel={<Icon icon="chevron-left" width={22} height={22} />}
+          pageCount={pageCount}
           pageRangeDisplayed={2}
           marginPagesDisplayed={2}
           containerClassName={'pagination-container'}

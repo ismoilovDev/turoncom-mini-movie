@@ -8,29 +8,43 @@
 
    &_head {
       position: relative;
-      width: 90%;
-      height: 250px;
+      width: 80%;
+      height: 350px;
       margin: 0 auto;
       overflow: hidden;
 
       img {
          width: 100%;
-         height: 200px;
+         height: 280px;
          border-radius: 7px;
+      }
+
+      @media (min-width: 768px) {
+         width: 90%;
+         height: 250px;
+         img {
+            height: 200px;
+         }
       }
    }
 
    &_body {
-      max-width: 90%;
+      max-width: 80%;
       margin: 5px auto 0;
       color: #fff;
 
       span {
          font-size: 4vw;
+      }
 
-         @media (min-width: 420px) {
+      @media (min-width: 420px) {
+         span {
             font-size: 12px;
          }
+      }
+
+      @media (min-width: 768px) {
+         max-width: 90%;
       }
    }
 }
