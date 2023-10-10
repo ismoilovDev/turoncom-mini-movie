@@ -8,7 +8,7 @@ import NotFound from '../components/NotFound'
 export default function Home({ data }) {
   const router = useRouter()
 
-  const handleChanges = ({ selected }) => {
+  const handlePageClick = ({ selected }) => {
     router.push({
       query: { page: selected + 1 }
     })
@@ -34,19 +34,20 @@ export default function Home({ data }) {
       </div>
       <div className="pagination-wrapper">
         <ReactPaginate
-          previousLabel={<Icon icon="chevron-left" width={20} height={20} />}
           nextLabel={<Icon icon="chevron-right" width={20} height={20} />}
+          previousLabel={<Icon icon="chevron-left" width={20} height={20} />}
           pageCount={10}
-          pageRangeDisplayed={2}
-          marginPagesDisplayed={2}
+          pageRangeDisplayed={0}
+          marginPagesDisplayed={0}
           containerClassName={'pagination'}
           pageClassName={'pagination-item'}
           breakClassName={'pagination-item'}
           previousClassName={'pagination-item'}
           nextClassName={'pagination-item'}
           activeClassName={'active_page'}
-          onPageChange={handleChanges}
+          onPageChange={handlePageClick}
           forcePage={Number(router.query.page) - 1 || 0}
+          renderOnZeroPageCount={null}
         />
       </div>
     </div>
