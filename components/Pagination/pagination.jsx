@@ -1,6 +1,5 @@
 import { memo } from "react"
 import ReactPaginate from "react-paginate"
-import ReactPaginate from 'react-paginate'
 import Icon from '../../public/assets/Icons'
 
 const Pagination = ({ forcePage, pageCount, onPageChange }) => {
@@ -10,7 +9,7 @@ const Pagination = ({ forcePage, pageCount, onPageChange }) => {
          previousLabel={<Icon icon="chevron-left" width={22} height={22} />}
          breakLabel="..."
          pageCount={pageCount}
-         pageRangeDisplayed={5}
+         pageRangeDisplayed={3}
          marginPagesDisplayed={2}
          containerClassName={'pagination-container'}
          pageClassName={'pagination-item'}
