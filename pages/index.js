@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router'
-import ReactPaginate from 'react-paginate'
 import { BASE_URl, SECRET_TOKEN } from '../config'
 import MovieItem from '../components/MovieItem'
-import Icon from '../public/assets/Icons'
 import NotFound from '../components/NotFound'
+import Pagination from '../components/Pagination/pagination'
 
 export default function Home({ data }) {
   const router = useRouter()
@@ -34,21 +33,10 @@ export default function Home({ data }) {
         }
       </div>
       <div className="pagination-wrapper">
-        <ReactPaginate
-          nextLabel={<Icon icon="chevron-right" width={22} height={22} />}
-          previousLabel={<Icon icon="chevron-left" width={22} height={22} />}
-          pageCount={pageCount}
-          pageRangeDisplayed={2}
-          marginPagesDisplayed={2}
-          containerClassName={'pagination-container'}
-          pageClassName={'pagination-item'}
-          breakClassName={'pagination-item'}
-          previousClassName={'pagination-item'}
-          nextClassName={'pagination-item'}
-          activeClassName={'active_page'}
-          onPageChange={handlePageClick}
+        <Pagination
           forcePage={Number(router.query.page) - 1 || 0}
-          renderOnZeroPageCount={null}
+          pageCount={pageCount}
+          onPageChange={handlePageClick}
         />
       </div>
     </div>
