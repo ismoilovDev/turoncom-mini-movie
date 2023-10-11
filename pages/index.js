@@ -19,19 +19,21 @@ export default function Home({ data }) {
 
   const { movies } = data
   const pageCount = Math.ceil(data?.total / 20)
-  
+
   return (
     <div className="home">
       <h5 className="section-title">Фильмы</h5>
-      <div className="movies-list">
-        {
-          movies?.length > 0 ?
-            movies.map(item => (
-              <MovieItem key={item.id} data={item} />
-            )) :
-            <p className="data-not-found">Movies not found</p>
-        }
-      </div>
+      {
+        movies?.length > 0 ?
+          <div className="movies-list">
+            {
+              movies.map(item => (
+                <MovieItem key={item.id} data={item} />
+              ))
+            }
+          </div> :
+          < NotFound />
+      }
       <div className="pagination-wrapper">
         <Pagination
           forcePage={Number(router.query.page) - 1 || 0}

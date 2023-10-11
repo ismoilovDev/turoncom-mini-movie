@@ -9,8 +9,8 @@ const Pagination = ({ forcePage, pageCount, onPageChange }) => {
          previousLabel={<Icon icon="chevron-left" width={22} height={22} />}
          breakLabel="..."
          pageCount={pageCount}
-         pageRangeDisplayed={3}
-         marginPagesDisplayed={2}
+         pageRangeDisplayed={0}
+         marginPagesDisplayed={1}
          containerClassName={'pagination-container'}
          pageClassName={'pagination-item'}
          breakClassName={'pagination-item'}
